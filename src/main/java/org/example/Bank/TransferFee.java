@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Bank;
 
 public class TransferFee {
     public static final double DEFAULT_TRANSFER_FEE = 10;

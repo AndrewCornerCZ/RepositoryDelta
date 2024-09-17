@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Bank;
 
 public interface Calc {
 

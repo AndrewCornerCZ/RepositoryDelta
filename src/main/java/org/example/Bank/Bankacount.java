@@ -1,4 +1,6 @@
-package org.example;
+package org.example.Bank;
+
+import person.Owner;
 
 public class Bankacount {
     private double balance;

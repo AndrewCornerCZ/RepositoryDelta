@@ -1,5 +1,9 @@
 package org.example;
 
+import org.example.Bank.*;
+import person.Owner;
+import person.OwnerFactory;
+
 import java.util.Scanner;
 
 public class App {
@@ -32,9 +36,16 @@ public class App {
     }
     public void runbank()
     {
-        Owner majitel = new Owner("Pepa", "Nový");
+        Owner majitel = new Owner("Pepa", "Nový", "1");
+        OwnerFactory owner = new OwnerFactory();
+        owner.createOwner("Spytihněv", "Novák", "3");
+        BankFactory bankFactory = new BankFactory();
+
+        Bankacount OriginalBankaccount = bankFactory.createBankacount(200.0, majitel, "1");
+        Bankacount StudentBankaccount = bankFactory.createStudentBankacount(200.0, majitel, "1");
+
         Bankacount bank = new Bankacount(1000000.0, majitel, "123456789");
-        Owner majitel2 = new Owner("Franta", "Novotný");
+        Owner majitel2 = new Owner("Franta", "Novotný", "2");
         Bankacount bank2 = new Bankacount(0.0, majitel2, "123456781");
         MoneyTransfer transfer = new MoneyTransfer();
         transfer.Add(bank, 200);

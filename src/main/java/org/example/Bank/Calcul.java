@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Bank;
 
 public class Calcul implements Calc {
     public double add(double a, double b) {
