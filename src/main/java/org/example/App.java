@@ -34,8 +34,18 @@ public class App {
     {
         Owner majitel = new Owner("Pepa", "Nový");
         Bankacount bank = new Bankacount(1000000.0, majitel, "123456789");
+        Owner majitel2 = new Owner("Franta", "Novotný");
+        Bankacount bank2 = new Bankacount(0.0, majitel2, "123456781");
         MoneyTransfer transfer = new MoneyTransfer();
         transfer.Add(bank, 200);
         transfer.Add(bank, 800);
+        Scanner sc = new Scanner(System.in);
+        try {
+            transfer.TransferMoneyBetweenAccounts(bank, bank2, sc.nextDouble());
+        }
+        catch (NoMoneyExpection e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 }
