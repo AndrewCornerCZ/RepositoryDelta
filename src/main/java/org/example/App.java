@@ -42,8 +42,21 @@ public class App {
         BankFactory bankFactory = new BankFactory();
 
         Bankacount OriginalBankaccount = bankFactory.createBankacount(200.0, majitel, "1");
-        Bankacount StudentBankaccount = bankFactory.createStudentBankacount(200.0, majitel, "1");
+        Bankacount StudentBankaccount = bankFactory.createStudentBankacount(200.0, majitel, "2");
+        Bankacount SavingBankaccount = bankFactory.createStudentBankacount(200.0, majitel, "3");
 
+
+        if (StudentBankaccount instanceof StudentBankacount)
+        {
+            String expire = ((StudentBankacount) StudentBankaccount).getStudies();
+            System.out.println(expire);
+        }
+
+        if (SavingBankaccount instanceof Interesting)
+        {
+            double interest = ((Interesting) SavingBankaccount).getInterest();
+            System.out.println(interest);
+        }
         Bankacount bank = new Bankacount(1000000.0, majitel, "123456789");
         Owner majitel2 = new Owner("Franta", "Novotný", "2");
         Bankacount bank2 = new Bankacount(0.0, majitel2, "123456781");

@@ -18,4 +18,8 @@ public class BankFactory {
         String bankAccountNumber = this.bankacountNumberGenerator.generateBankAccountNumber();
         return new StudentBankacount(balance, ownerr, bankAccountNumber);
     }
+    public Savingacount createSavingBankacount(double balance, Owner ownerr, String number) {
+        String bankAccountNumber = this.bankacountNumberGenerator.generateBankAccountNumber();
+        return new Savingacount(balance, ownerr, bankAccountNumber);
+    }
 }
