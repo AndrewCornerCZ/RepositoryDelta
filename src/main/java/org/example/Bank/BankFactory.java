@@ -2,24 +2,35 @@ package org.example.Bank;
 
 import person.Owner;
 
-public class BankFactory {
+public class BankFactory implements AcountNumberGenerator {
 
-    private BankacountNumberGenerator bankacountNumberGenerator;
+    private AcountNumberGenerator bankacountNumberGenerator;
 
-    public BankacountNumberGenerator getBankacountNumberGenerator() {
-        return bankacountNumberGenerator;
+    public BankFactory(AcountNumberGenerator bankacountNumberGenerator) {
+        this.bankacountNumberGenerator = bankacountNumberGenerator;
     }
 
-    public Bankacount createBankacount(double balance, Owner ownerr, String number) {
+    public Bankacount createBankacount(double balance, Owner owner) {
         String bankAccountNumber = this.bankacountNumberGenerator.generateBankAccountNumber();
-        return new Bankacount(balance, ownerr, bankAccountNumber);
+        return new Bankacount(balance, owner, bankAccountNumber);
     }
-    public StudentBankacount createStudentBankacount(double balance, Owner ownerr, String number) {
-        String bankAccountNumber = this.bankacountNumberGenerator.generateBankAccountNumber();
-        return new StudentBankacount(balance, ownerr, bankAccountNumber);
+    public StudentBankacount createStudentBankacount(double balance, Owner owner, String number) {
+        return new StudentBankacount(balance, owner, number);
     }
-    public Savingacount createSavingBankacount(double balance, Owner ownerr, String number) {
+    public StudentBankacount createStudentBankacount(double balance, Owner owner) {
         String bankAccountNumber = this.bankacountNumberGenerator.generateBankAccountNumber();
-        return new Savingacount(balance, ownerr, bankAccountNumber);
+        return new StudentBankacount(balance, owner, bankAccountNumber);
+    }
+    public Savingacount createSavingBankacount(double balance, Owner owner) {
+        String bankAccountNumber = this.bankacountNumberGenerator.generateBankAccountNumber();
+        return new Savingacount(balance, owner, bankAccountNumber);
+    }
+    public Savingacount createSavingBankacount(double balance, Owner owner, String number) {
+        return new Savingacount(balance, owner, number);
+    }
+
+    @Override
+    public String generateBankAccountNumber() {
+        return "";
     }
 }

@@ -3,6 +3,7 @@ package org.example;
 import org.example.Bank.*;
 import person.Owner;
 import person.OwnerFactory;
+import person.PersonalIdValidator;
 
 import java.util.Scanner;
 
@@ -36,14 +37,20 @@ public class App {
     }
     public void runbank()
     {
-        Owner majitel = new Owner("Pepa", "Nový", "1");
-        OwnerFactory owner = new OwnerFactory();
-        owner.createOwner("Spytihněv", "Novák", "3");
-        BankFactory bankFactory = new BankFactory();
+        AcountNumberGenerator bankAccountNumberGenerator = new BankacountNumberGenerator();
+        TransferFee transferFee = new TransferFee();
+        PersonalIdValidator personvalidator = new PersonalIdValidator();
 
-        Bankacount OriginalBankaccount = bankFactory.createBankacount(200.0, majitel, "1");
-        Bankacount StudentBankaccount = bankFactory.createStudentBankacount(200.0, majitel, "2");
-        Bankacount SavingBankaccount = bankFactory.createStudentBankacount(200.0, majitel, "3");
+        OwnerFactory owner = new OwnerFactory(bankAccountNumberGenerator, personvalidator);
+        AccountDetailPrinter accountDetailPrinter = new AccountDetailPrinter();
+        MoneyTransfer moneyTransfer = new MoneyTransfer(accountDetailPrinter, transferFee);
+
+        Owner majitel = owner.createOwner("Spytihněv", "Novák", "3");
+        BankFactory bankFactory = new BankFactory(bankAccountNumberGenerator);
+
+        Bankacount OriginalBankaccount = bankFactory.createBankacount(200.0, majitel);
+        Bankacount StudentBankaccount = bankFactory.createStudentBankacount(200.0, majitel);
+        Bankacount SavingBankaccount = bankFactory.createSavingBankacount(200.0, majitel);
 
 
         if (StudentBankaccount instanceof StudentBankacount)
@@ -60,12 +67,11 @@ public class App {
         Bankacount bank = new Bankacount(1000000.0, majitel, "123456789");
         Owner majitel2 = new Owner("Franta", "Novotný", "2");
         Bankacount bank2 = new Bankacount(0.0, majitel2, "123456781");
-        MoneyTransfer transfer = new MoneyTransfer();
-        transfer.Add(bank, 200);
-        transfer.Add(bank, 800);
+        moneyTransfer.Add(bank, 200);
+        moneyTransfer.Add(bank2, 800);
         Scanner sc = new Scanner(System.in);
         try {
-            transfer.TransferMoneyBetweenAccounts(bank, bank2, sc.nextDouble());
+            moneyTransfer.TransferMoneyBetweenAccounts(bank, bank2, sc.nextDouble());
         }
         catch (NoMoneyExpection e)
         {

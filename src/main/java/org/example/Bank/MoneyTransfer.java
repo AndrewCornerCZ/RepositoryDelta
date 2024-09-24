@@ -2,11 +2,19 @@ package org.example.Bank;
 
 public class MoneyTransfer {
 
+
+    private AccountDetailPrinter accountDetailPrinter;
+    private TransferFee transferFee;
+
+    public MoneyTransfer(AccountDetailPrinter accountDetailPrinter, TransferFee transferFee) {
+        this.accountDetailPrinter = accountDetailPrinter;
+        this.transferFee = transferFee;
+    }
+
     public void Add (Bankacount bankacount, double add)
     {
-        TransferFee poplatek = new TransferFee();
         double balance = bankacount.getBalance();
-        double fee = poplatek.FeeCalcul(add);
+        double fee = this.transferFee.FeeCalcul(add);
         double NewBalance = balance + add - fee;
 
         bankacount.setBalance(NewBalance);
@@ -24,7 +32,7 @@ public class MoneyTransfer {
         {
             throw new NoMoneyExpection("Nedostatek financí");
         }
-
+            this.accountDetailPrinter.printDetail(sender);
             sender.setBalance(sender.getBalance() - amount);
             System.out.println("Balance: " + sender.getBalance());
             receiver.setBalance(receiver.getBalance() + amount);

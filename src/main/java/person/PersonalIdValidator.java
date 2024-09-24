@@ -1,6 +1,6 @@
 package person;
 
-public class personalIdValidator {
+public class PersonalIdValidator {
 
     public boolean isValid(String personalId) {
         return true;

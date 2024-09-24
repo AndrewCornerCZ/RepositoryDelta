@@ -3,7 +3,7 @@ package org.example.Bank;
 
 import java.util.Random;
 
-public class BankacountNumberGenerator {
+public class BankacountNumberGenerator implements AcountNumberGenerator{
     public String generateBankAccountNumber() {
         Random rand = new Random();
         int random;
@@ -16,4 +16,6 @@ public class BankacountNumberGenerator {
 
         return Id;
     }
+
+
 }

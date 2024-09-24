@@ -1,11 +1,16 @@
 package person;
 
+import org.example.Bank.AcountNumberGenerator;
+import org.example.Bank.BankacountNumberGenerator;
+
 public class OwnerFactory {
 
-    private personalIdValidator personIdValidator;
+    private PersonalIdValidator personIdValidator;
+    private AcountNumberGenerator bankacountNumberGenerator;
 
-    public OwnerFactory() {
-        this.personIdValidator = new personalIdValidator();
+    public OwnerFactory(AcountNumberGenerator bankacountNumberGenerator, PersonalIdValidator personIdValidator) {
+        this.personIdValidator = personIdValidator;
+        this.bankacountNumberGenerator = bankacountNumberGenerator;
     }
 
     public Owner createOwner(String name, String lastName, String personalId) {
@@ -13,6 +18,7 @@ public class OwnerFactory {
         if(!this.personIdValidator.isValid(personalId)) {
             System.out.println("Invalid personal ID");
         }
+        System.out.println("Number:" + bankacountNumberGenerator.generateBankAccountNumber());
 
         return new Owner(name, lastName, personalId);
     }
