@@ -4,6 +4,8 @@ import org.example.Bank.*;
 import person.Owner;
 import person.OwnerFactory;
 import person.PersonalIdValidator;
+import print.Calc;
+import print.Calcul;
 
 import java.util.Scanner;
 
@@ -37,22 +39,11 @@ public class App {
     }
     public void runbank()
     {
-        AcountNumberGenerator bankAccountNumberGenerator = new BankacountNumberGenerator();
-        TransferFee transferFee = new TransferFee();
-        PersonalIdValidator personvalidator = new PersonalIdValidator();
+        DIContainer serviceContainer = new DIContainer();
 
-        OwnerFactory owner = new OwnerFactory(bankAccountNumberGenerator, personvalidator);
-        AccountDetailPrinter accountDetailPrinter = new AccountDetailPrinter();
-        MoneyTransfer moneyTransfer = new MoneyTransfer(accountDetailPrinter, transferFee);
-
-        Owner majitel = owner.createOwner("Spytihněv", "Novák", "3");
-        BankFactory bankFactory = new BankFactory(bankAccountNumberGenerator);
-
-        Bankacount OriginalBankaccount = bankFactory.createBankacount(200.0, majitel);
-        Bankacount StudentBankaccount = bankFactory.createStudentBankacount(200.0, majitel);
-        Bankacount SavingBankaccount = bankFactory.createSavingBankacount(200.0, majitel);
-
-
+        Bankacount OriginalBankaccount = serviceContainer.bankFactory.createBankacount(200.0, serviceContainer.majitel);
+        Bankacount StudentBankaccount = serviceContainer.bankFactory.createStudentBankacount(200.0, serviceContainer.majitel);
+        Bankacount SavingBankaccount = serviceContainer.bankFactory.createSavingBankacount(200.0, serviceContainer.majitel);
         if (StudentBankaccount instanceof StudentBankacount)
         {
             String expire = ((StudentBankacount) StudentBankaccount).getStudies();
@@ -64,14 +55,17 @@ public class App {
             double interest = ((Interesting) SavingBankaccount).getInterest();
             System.out.println(interest);
         }
-        Bankacount bank = new Bankacount(1000000.0, majitel, "123456789");
+
+
+
+        Bankacount bank = new Bankacount(1000000.0, serviceContainer.majitel, "123456789");
         Owner majitel2 = new Owner("Franta", "Novotný", "2");
         Bankacount bank2 = new Bankacount(0.0, majitel2, "123456781");
-        moneyTransfer.Add(bank, 200);
-        moneyTransfer.Add(bank2, 800);
+        serviceContainer.moneyTransfer.Add(bank, 200);
+        serviceContainer.moneyTransfer.Add(bank2, 800);
         Scanner sc = new Scanner(System.in);
         try {
-            moneyTransfer.TransferMoneyBetweenAccounts(bank, bank2, sc.nextDouble());
+            serviceContainer.moneyTransfer.TransferMoneyBetweenAccounts(bank, bank2, sc.nextDouble());
         }
         catch (NoMoneyExpection e)
         {
