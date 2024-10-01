@@ -2,7 +2,7 @@ package org.example.Bank;
 
 public class AccountDetailPrinter {
 
-    public void printDetail(Bankacount accout)
+    public void printDetail(BankAccount accout)
     {
         System.out.println("Account Number: " + accout.getAccountNumber());
     }

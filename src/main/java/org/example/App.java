@@ -1,9 +1,8 @@
 package org.example;
 
+import com.google.inject.Inject;
 import org.example.Bank.*;
 import person.Owner;
-import person.OwnerFactory;
-import person.PersonalIdValidator;
 import print.Calc;
 import print.Calcul;
 
@@ -37,13 +36,18 @@ public class App {
         System.out.println(kalk.mul(a, b));
 
     }
+    @Inject
+    DIContainer serviceContainer;
     public void runbank()
     {
-        DIContainer serviceContainer = new DIContainer();
 
-        Bankacount OriginalBankaccount = serviceContainer.bankFactory.createBankacount(200.0, serviceContainer.majitel);
-        Bankacount StudentBankaccount = serviceContainer.bankFactory.createStudentBankacount(200.0, serviceContainer.majitel);
-        Bankacount SavingBankaccount = serviceContainer.bankFactory.createSavingBankacount(200.0, serviceContainer.majitel);
+        Owner owner1 = serviceContainer.getOwner().createOwner("Ondra", "Kout", "23");
+        BankAccount OriginalBankaccount = serviceContainer.bankFactory.createBankacount(200.0, owner1);
+        BankAccount StudentBankaccount = serviceContainer.bankFactory.createStudentBankacount(200.0, owner1);
+        BankAccount SavingBankaccount = serviceContainer.bankFactory.createSavingBankacount(200.0, owner1);
+
+        System.out.println(serviceContainer.getOwnerJsonSerializationService().serializeOwner(owner1));
+
         if (StudentBankaccount instanceof StudentBankacount)
         {
             String expire = ((StudentBankacount) StudentBankaccount).getStudies();
@@ -58,18 +62,18 @@ public class App {
 
 
 
-        Bankacount bank = new Bankacount(1000000.0, serviceContainer.majitel, "123456789");
-        Owner majitel2 = new Owner("Franta", "Novotný", "2");
-        Bankacount bank2 = new Bankacount(0.0, majitel2, "123456781");
-        serviceContainer.moneyTransfer.Add(bank, 200);
-        serviceContainer.moneyTransfer.Add(bank2, 800);
-        Scanner sc = new Scanner(System.in);
-        try {
-            serviceContainer.moneyTransfer.TransferMoneyBetweenAccounts(bank, bank2, sc.nextDouble());
-        }
-        catch (NoMoneyExpection e)
-        {
-            System.out.println(e.getMessage());
-        }
+        //Bankacount bank = new Bankacount(1000000.0, owner1, "123456789");
+        //Owner majitel2 = new Owner("Franta", "Novotný", "2");
+        //Bankacount bank2 = new Bankacount(0.0, majitel2, "123456781");
+        //serviceContainer.moneyTransfer.Add(bank, 200);
+        //serviceContainer.moneyTransfer.Add(bank2, 800);
+        //Scanner sc = new Scanner(System.in);
+        //try {
+        //    serviceContainer.moneyTransfer.TransferMoneyBetweenAccounts(bank, bank2, sc.nextDouble());
+        //}
+        //catch (NoMoneyExpection e)
+        //{
+            //    System.out.println(e.getMessage());
+        //}
     }
 }

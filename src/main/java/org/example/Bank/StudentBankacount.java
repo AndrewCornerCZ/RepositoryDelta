@@ -2,7 +2,7 @@ package org.example.Bank;
 
 import person.Owner;
 
-public class StudentBankacount extends Bankacount{
+public class StudentBankacount extends BankAccount {
 
     private String studiesConfirmation;
 

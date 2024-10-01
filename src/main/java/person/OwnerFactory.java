@@ -1,14 +1,13 @@
 package person;
 
-import org.example.Bank.AcountNumberGenerator;
-import org.example.Bank.BankacountNumberGenerator;
+import org.example.Bank.AccountNumberGenerator;
 
 public class OwnerFactory {
 
     private PersonalIdValidator personIdValidator;
-    private AcountNumberGenerator bankacountNumberGenerator;
+    private AccountNumberGenerator bankacountNumberGenerator;
 
-    public OwnerFactory(AcountNumberGenerator bankacountNumberGenerator, PersonalIdValidator personIdValidator) {
+    public OwnerFactory(AccountNumberGenerator bankacountNumberGenerator, PersonalIdValidator personIdValidator) {
         this.personIdValidator = personIdValidator;
         this.bankacountNumberGenerator = bankacountNumberGenerator;
     }

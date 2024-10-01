@@ -1,21 +1,22 @@
 package org.example;
 
+import com.google.inject.Inject;
 import org.example.Bank.*;
-import person.Owner;
-import person.OwnerFactory;
-import person.PersonalIdValidator;
-
+import person.*;
+import com.google.inject.Singleton;
+@Singleton
 public class DIContainer {
-    AcountNumberGenerator bankAccountNumberGenerator = new BankacountNumberGenerator();
+    AccountNumberGenerator bankAccountNumberGenerator = new BankAccountNumberGenerator();
     Savingacount.TransferFee transferFee = new Savingacount.TransferFee();
     PersonalIdValidator personvalidator = new PersonalIdValidator();
-    OwnerFactory owner = new OwnerFactory(bankAccountNumberGenerator, personvalidator);
+    OwnerFactory ownerFactory = new OwnerFactory(bankAccountNumberGenerator, personvalidator);
     AccountDetailPrinter accountDetailPrinter = new AccountDetailPrinter();
-    SLBankacountGenerator.MoneyTransfer moneyTransfer = new SLBankacountGenerator.MoneyTransfer(accountDetailPrinter, transferFee);
-    Owner majitel = owner.createOwner("Spytihněv", "Novák", "3");
-    BankFactory bankFactory = new BankFactory(bankAccountNumberGenerator);
+    MoneyTransfer moneyTransfer = new MoneyTransfer(accountDetailPrinter, transferFee);
+    PersonSerialiazationService ownerJsonSerializationService = new OwnerGsonSerializationService();
 
-    public AcountNumberGenerator getBankAccountNumberGenerator() {
+    @Inject
+    public BankFactory bankFactory;
+    public AccountNumberGenerator getBankAccountNumberGenerator() {
         return bankAccountNumberGenerator;
     }
 
@@ -28,22 +29,26 @@ public class DIContainer {
     }
 
     public OwnerFactory getOwner() {
-        return owner;
+        return ownerFactory;
     }
 
     public AccountDetailPrinter getAccountDetailPrinter() {
         return accountDetailPrinter;
     }
 
-    public SLBankacountGenerator.MoneyTransfer getMoneyTransfer() {
+    public MoneyTransfer getMoneyTransfer() {
         return moneyTransfer;
-    }
-
-    public Owner getMajitel() {
-        return majitel;
     }
 
     public BankFactory getBankFactory() {
         return bankFactory;
+    }
+
+    public PersonSerialiazationService getOwnerJsonSerializationService() {
+        return ownerJsonSerializationService;
+    }
+
+    public OwnerFactory getOwnerFactory() {
+        return ownerFactory;
     }
 }

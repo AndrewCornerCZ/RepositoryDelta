@@ -1,18 +1,21 @@
 package org.example.Bank;
 
 import person.Owner;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
-public class BankFactory implements AcountNumberGenerator {
+@Singleton
+public class BankFactory implements AccountNumberGenerator {
+    @Inject
+    private AccountNumberGenerator bankacountNumberGenerator;
 
-    private AcountNumberGenerator bankacountNumberGenerator;
-
-    public BankFactory(AcountNumberGenerator bankacountNumberGenerator) {
+    public BankFactory(AccountNumberGenerator bankacountNumberGenerator) {
         this.bankacountNumberGenerator = bankacountNumberGenerator;
     }
 
-    public Bankacount createBankacount(double balance, Owner owner) {
+    public BankAccount createBankacount(double balance, Owner owner) {
         String bankAccountNumber = this.bankacountNumberGenerator.generateBankAccountNumber();
-        return new Bankacount(balance, owner, bankAccountNumber);
+        return new BankAccount(balance, owner, bankAccountNumber);
     }
     public StudentBankacount createStudentBankacount(double balance, Owner owner, String number) {
         return new StudentBankacount(balance, owner, number);
