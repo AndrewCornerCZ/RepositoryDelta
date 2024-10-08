@@ -2,7 +2,12 @@ package org.example;
 
 import com.google.inject.Inject;
 import org.example.Bank.*;
+import org.example.Bank.Card.BankCard;
+import org.example.Bank.Card.BankCardFactory;
 import person.Owner;
+import person.OwnerFactory;
+import person.OwnerJsonSerializationService;
+import person.PersonSerialiazationService;
 import print.Calc;
 import print.Calcul;
 
@@ -37,16 +42,22 @@ public class App {
 
     }
     @Inject
-    DIContainer serviceContainer;
+    PersonSerialiazationService personSerialiazationService;
+    @Inject
+    OwnerFactory ownerFactory;
+    @Inject
+    BankFactory bankFactory;
+    @Inject
+    BankCardFactory bankCardFactory;
     public void runbank()
     {
+        BankCard card = this.bankCardFactory.();
+        Owner owner1 = this.ownerFactory.createOwner("Ondra", "Kout", "23");
+        BankAccount OriginalBankaccount = this.bankFactory.createBankacount(200.0, owner1);
+        BankAccount StudentBankaccount = this.bankFactory.createStudentBankacount(200.0, owner1);
+        BankAccount SavingBankaccount = this.bankFactory.createSavingBankacount(200.0, owner1);
 
-        Owner owner1 = serviceContainer.getOwner().createOwner("Ondra", "Kout", "23");
-        BankAccount OriginalBankaccount = serviceContainer.bankFactory.createBankacount(200.0, owner1);
-        BankAccount StudentBankaccount = serviceContainer.bankFactory.createStudentBankacount(200.0, owner1);
-        BankAccount SavingBankaccount = serviceContainer.bankFactory.createSavingBankacount(200.0, owner1);
-
-        System.out.println(serviceContainer.getOwnerJsonSerializationService().serializeOwner(owner1));
+        System.out.println(personSerialiazationService.serializeOwner(owner1));
 
         if (StudentBankaccount instanceof StudentBankacount)
         {
@@ -61,19 +72,5 @@ public class App {
         }
 
 
-
-        //Bankacount bank = new Bankacount(1000000.0, owner1, "123456789");
-        //Owner majitel2 = new Owner("Franta", "Novotný", "2");
-        //Bankacount bank2 = new Bankacount(0.0, majitel2, "123456781");
-        //serviceContainer.moneyTransfer.Add(bank, 200);
-        //serviceContainer.moneyTransfer.Add(bank2, 800);
-        //Scanner sc = new Scanner(System.in);
-        //try {
-        //    serviceContainer.moneyTransfer.TransferMoneyBetweenAccounts(bank, bank2, sc.nextDouble());
-        //}
-        //catch (NoMoneyExpection e)
-        //{
-            //    System.out.println(e.getMessage());
-        //}
     }
 }

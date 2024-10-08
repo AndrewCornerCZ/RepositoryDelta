@@ -1,16 +1,15 @@
 package person;
-
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.example.Bank.AccountNumberGenerator;
-
+@Singleton
 public class OwnerFactory {
 
+    @Inject
     private PersonalIdValidator personIdValidator;
+    @Inject
     private AccountNumberGenerator bankacountNumberGenerator;
 
-    public OwnerFactory(AccountNumberGenerator bankacountNumberGenerator, PersonalIdValidator personIdValidator) {
-        this.personIdValidator = personIdValidator;
-        this.bankacountNumberGenerator = bankacountNumberGenerator;
-    }
 
     public Owner createOwner(String name, String lastName, String personalId) {
 

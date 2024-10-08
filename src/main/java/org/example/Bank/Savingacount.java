@@ -1,8 +1,11 @@
 package org.example.Bank;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import person.Owner;
-
+@Singleton
 public class Savingacount extends BankAccount implements Interesting{
+    @Inject
     public Savingacount(Double balance, Owner owner, String accountNumber) {
         super(balance, owner, accountNumber);
     }

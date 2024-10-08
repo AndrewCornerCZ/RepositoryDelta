@@ -1,15 +1,16 @@
 package org.example.Bank;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
+@Singleton
 public class MoneyTransfer {
 
-
+    @Inject
     private AccountDetailPrinter accountDetailPrinter;
+    @Inject
     private Savingacount.TransferFee transferFee;
 
-    public MoneyTransfer(AccountDetailPrinter accountDetailPrinter, Savingacount.TransferFee transferFee) {
-        this.accountDetailPrinter = accountDetailPrinter;
-        this.transferFee = transferFee;
-    }
 
     public void Add (BankAccount bankacount, double add)
     {

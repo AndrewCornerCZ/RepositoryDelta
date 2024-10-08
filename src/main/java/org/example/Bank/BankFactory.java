@@ -1,17 +1,15 @@
 package org.example.Bank;
 
+import org.example.Bank.Card.BankCard;
 import person.Owner;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class BankFactory implements AccountNumberGenerator {
+public class BankFactory {
     @Inject
     private AccountNumberGenerator bankacountNumberGenerator;
 
-    public BankFactory(AccountNumberGenerator bankacountNumberGenerator) {
-        this.bankacountNumberGenerator = bankacountNumberGenerator;
-    }
 
     public BankAccount createBankacount(double balance, Owner owner) {
         String bankAccountNumber = this.bankacountNumberGenerator.generateBankAccountNumber();
@@ -32,8 +30,4 @@ public class BankFactory implements AccountNumberGenerator {
         return new Savingacount(balance, owner, number);
     }
 
-    @Override
-    public String generateBankAccountNumber() {
-        return "";
-    }
 }
