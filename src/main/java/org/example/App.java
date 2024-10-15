@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import org.example.Bank.*;
 import org.example.Bank.Card.BankCard;
 import org.example.Bank.Card.BankCardFactory;
+import org.example.Bank.exception.NoMoneyOnAccountException;
 import person.Owner;
 import person.OwnerFactory;
 import person.OwnerJsonSerializationService;
@@ -51,8 +52,7 @@ public class App {
     BankCardFactory bankCardFactory;
     @Inject
     AtmService atmService;
-    public void runbank()
-    {
+    public void runbank() throws NoMoneyOnAccountException {
         BankCard card = this.bankCardFactory.createBankCard();
         Owner owner1 = this.ownerFactory.createOwner("Ondra", "Kout", "23");
         BankAccount OriginalBankaccount = this.bankFactory.createBankacount(200.0, owner1);
@@ -74,6 +74,6 @@ public class App {
             System.out.println(interest);
         }
         atmService.depositMoney(OriginalBankaccount, 100);
-
+        atmService.withdrawMoney(OriginalBankaccount, 100);
     }
 }
