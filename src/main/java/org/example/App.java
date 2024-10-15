@@ -49,13 +49,16 @@ public class App {
     BankFactory bankFactory;
     @Inject
     BankCardFactory bankCardFactory;
+    @Inject
+    AtmService atmService;
     public void runbank()
     {
-        BankCard card = this.bankCardFactory.c;
+        BankCard card = this.bankCardFactory.createBankCard();
         Owner owner1 = this.ownerFactory.createOwner("Ondra", "Kout", "23");
         BankAccount OriginalBankaccount = this.bankFactory.createBankacount(200.0, owner1);
         BankAccount StudentBankaccount = this.bankFactory.createStudentBankacount(200.0, owner1);
         BankAccount SavingBankaccount = this.bankFactory.createSavingBankacount(200.0, owner1);
+        OriginalBankaccount.AddCard(card);
 
         System.out.println(personSerialiazationService.serializeOwner(owner1));
 
@@ -70,7 +73,7 @@ public class App {
             double interest = ((Interesting) SavingBankaccount).getInterest();
             System.out.println(interest);
         }
-
+        atmService.depositMoney(OriginalBankaccount, 100);
 
     }
 }

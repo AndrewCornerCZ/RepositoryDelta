@@ -7,7 +7,7 @@ public class AtmService {
 
     public void withdrawMoney(BankAccount bankAccount, double amount) throws NoMoneyOnAccountException {
         if(bankAccount.getBalance() < amount){
-            throw new NoMoneyOnAccountException("No money bro");
+            throw new NoMoneyOnAccountException("No money");
         }
         System.out.println("Balance before: " + bankAccount.getBalance());
         bankAccount.setBalance(bankAccount.getBalance()-amount);
