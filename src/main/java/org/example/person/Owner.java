@@ -1,4 +1,4 @@
-package person;
+package org.example.person;
 
 public class Owner {
     private String name;

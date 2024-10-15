@@ -9,7 +9,7 @@ public class MoneyTransfer {
     @Inject
     private AccountDetailPrinter accountDetailPrinter;
     @Inject
-    private Savingacount.TransferFee transferFee;
+    private SavingAccount.TransferFee transferFee;
 
 
     public void Add (BankAccount bankacount, double add)

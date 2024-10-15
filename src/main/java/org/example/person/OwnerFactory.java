@@ -1,4 +1,4 @@
-package person;
+package org.example.person;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.example.Bank.AccountNumberGenerator;

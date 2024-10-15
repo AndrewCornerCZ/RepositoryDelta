@@ -1,4 +1,4 @@
-package print;
+package org.example.print;
 
 public class Calcul implements Calc {
     public double add(double a, double b) {

@@ -1,8 +1,9 @@
 package org.example.Bank;
 
 import org.example.Bank.Card.BankCard;
-import person.Owner;
+import org.example.person.Owner;
 
+import javax.smartcardio.Card;
 import java.util.*;
 
 public class BankAccount {
@@ -35,5 +36,8 @@ public class BankAccount {
 
     public void AddCard(BankCard card) {
         cards.put(card.getNumber(), card);
+    }
+    public Map<String, BankCard> GetCards() {
+        return cards;
     }
 }

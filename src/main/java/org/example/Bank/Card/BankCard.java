@@ -1,17 +1,17 @@
 package org.example.Bank.Card;
 
 
-import person.Owner;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.example.Bank.BankAccount;
 
 public class BankCard {
     private String number;
     private String pin;
+    private BankAccount bankAccount;
 
-    public BankCard(String number, String pin) {
-        BankCardFactory bankCardFactory = new BankCardFactory();
+    public BankCard(String number, String pin, BankAccount bankAccount) {
+        this.number = number;
+        this.pin = pin;
+        bankAccount = bankAccount;
     }
 
     public String getNumber() {

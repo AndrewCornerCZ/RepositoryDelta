@@ -1,4 +1,4 @@
-package print;
+package org.example.print;
 
 public interface Calc {
 

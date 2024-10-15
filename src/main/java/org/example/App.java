@@ -5,13 +5,13 @@ import org.example.Bank.*;
 import org.example.Bank.Card.BankCard;
 import org.example.Bank.Card.BankCardFactory;
 import org.example.Bank.exception.NoMoneyOnAccountException;
-import person.Owner;
-import person.OwnerFactory;
-import person.OwnerJsonSerializationService;
-import person.PersonSerialiazationService;
-import print.Calc;
-import print.Calcul;
+import org.example.person.Owner;
+import org.example.person.OwnerFactory;
+import org.example.person.PersonSerialiazationService;
+import org.example.print.Calc;
+import org.example.print.Calcul;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class App {
@@ -52,28 +52,33 @@ public class App {
     BankCardFactory bankCardFactory;
     @Inject
     AtmService atmService;
+    @Inject
+    AccountFacade accountFacade;
+    @Inject
+    GlobalBankCardStorage globalBankCardStorage;
     public void runbank() throws NoMoneyOnAccountException {
-        BankCard card = this.bankCardFactory.createBankCard();
         Owner owner1 = this.ownerFactory.createOwner("Ondra", "Kout", "23");
-        BankAccount OriginalBankaccount = this.bankFactory.createBankacount(200.0, owner1);
-        BankAccount StudentBankaccount = this.bankFactory.createStudentBankacount(200.0, owner1);
-        BankAccount SavingBankaccount = this.bankFactory.createSavingBankacount(200.0, owner1);
-        OriginalBankaccount.AddCard(card);
-
+        BankAccount OriginalBankAccount = this.accountFacade.createBankAccount(100, owner1, true);
+        BankAccount StudentBankAccount = this.bankFactory.createStudentBankacount(200.0, owner1);
+        BankAccount SavingBankAccount = this.bankFactory.createSavingBankacount(200.0, owner1);
+        BankCard bankCard = null;
+        for (Map.Entry<String, BankCard> entrySet : OriginalBankAccount.GetCards().entrySet()) {
+            bankCard = entrySet.getValue();
+        }
         System.out.println(personSerialiazationService.serializeOwner(owner1));
 
-        if (StudentBankaccount instanceof StudentBankacount)
+        if (StudentBankAccount instanceof StudentBankAccount)
         {
-            String expire = ((StudentBankacount) StudentBankaccount).getStudies();
+            String expire = ((StudentBankAccount) StudentBankAccount).getStudies();
             System.out.println(expire);
         }
 
-        if (SavingBankaccount instanceof Interesting)
+        if (SavingBankAccount instanceof Interesting)
         {
-            double interest = ((Interesting) SavingBankaccount).getInterest();
+            double interest = ((Interesting) SavingBankAccount).getInterest();
             System.out.println(interest);
         }
-        atmService.depositMoney(OriginalBankaccount, 100);
-        atmService.withdrawMoney(OriginalBankaccount, 100);
+        atmService.depositMoney(globalBankCardStorage.getBankCard(bankCard.getNumber()), 100);
+        atmService.withdrawMoney(globalBankCardStorage.getBankCard(bankCard.getNumber()), 100);
     }
 }

@@ -1,18 +1,18 @@
 package org.example.Bank;
 
-import person.Owner;
+import org.example.person.Owner;
 
-public class StudentBankacount extends BankAccount {
+public class StudentBankAccount extends BankAccount {
 
     private String studiesConfirmation;
 
-    public StudentBankacount(Double balance, Owner owner, String accountNumber) {
+    public StudentBankAccount(Double balance, Owner owner, String accountNumber) {
         super(balance, owner, accountNumber);
 
         this.studiesConfirmation = null;
     }
 
-    public StudentBankacount(Double balance, Owner owner, String accountNumber, String StudiesConfirmation) {
+    public StudentBankAccount(Double balance, Owner owner, String accountNumber, String StudiesConfirmation) {
         super(balance, owner, accountNumber);
 
         this.studiesConfirmation = StudiesConfirmation;

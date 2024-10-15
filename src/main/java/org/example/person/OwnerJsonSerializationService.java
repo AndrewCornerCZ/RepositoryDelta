@@ -1,4 +1,4 @@
-package person;
+package org.example.person;
 
 public class OwnerJsonSerializationService implements PersonSerialiazationService {
     public String serializeOwner(Owner owner) {

@@ -2,7 +2,7 @@ package org.example.Bank;
 
 public class InterestingCounting {
 
-    public int Counting(Savingacount account)
+    public int Counting(SavingAccount account)
     {
         if (account.getBalance() < 500000)
         {

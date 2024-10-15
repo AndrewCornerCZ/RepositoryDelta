@@ -1,7 +1,6 @@
 package org.example.Bank;
 
-import org.example.Bank.Card.BankCard;
-import person.Owner;
+import org.example.person.Owner;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -15,19 +14,19 @@ public class BankFactory {
         String bankAccountNumber = this.bankacountNumberGenerator.generateBankAccountNumber();
         return new BankAccount(balance, owner, bankAccountNumber);
     }
-    public StudentBankacount createStudentBankacount(double balance, Owner owner, String number) {
-        return new StudentBankacount(balance, owner, number);
+    public StudentBankAccount createStudentBankacount(double balance, Owner owner, String number) {
+        return new StudentBankAccount(balance, owner, number);
     }
-    public StudentBankacount createStudentBankacount(double balance, Owner owner) {
+    public StudentBankAccount createStudentBankacount(double balance, Owner owner) {
         String bankAccountNumber = this.bankacountNumberGenerator.generateBankAccountNumber();
-        return new StudentBankacount(balance, owner, bankAccountNumber);
+        return new StudentBankAccount(balance, owner, bankAccountNumber);
     }
-    public Savingacount createSavingBankacount(double balance, Owner owner) {
+    public SavingAccount createSavingBankacount(double balance, Owner owner) {
         String bankAccountNumber = this.bankacountNumberGenerator.generateBankAccountNumber();
-        return new Savingacount(balance, owner, bankAccountNumber);
+        return new SavingAccount(balance, owner, bankAccountNumber);
     }
-    public Savingacount createSavingBankacount(double balance, Owner owner, String number) {
-        return new Savingacount(balance, owner, number);
+    public SavingAccount createSavingBankacount(double balance, Owner owner, String number) {
+        return new SavingAccount(balance, owner, number);
     }
 
 }
