@@ -20,8 +20,7 @@ public class GlobalBankCardStorage {
         return storage.get(cardNumber);
     }
 
-    public BankAccount addBankCard(String cardNumber, BankAccount bankAccount) {
+    public void addBankCard(String cardNumber, BankAccount bankAccount) {
         storage.put(cardNumber, bankAccount);
-        return bankAccount;
     }
 }

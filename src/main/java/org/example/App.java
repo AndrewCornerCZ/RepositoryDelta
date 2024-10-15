@@ -47,7 +47,7 @@ public class App {
     @Inject
     OwnerFactory ownerFactory;
     @Inject
-    BankFactory bankFactory;
+    BankAccountFactory bankAccountFactory;
     @Inject
     BankCardFactory bankCardFactory;
     @Inject
@@ -58,27 +58,29 @@ public class App {
     GlobalBankCardStorage globalBankCardStorage;
     public void runbank() throws NoMoneyOnAccountException {
         Owner owner1 = this.ownerFactory.createOwner("Ondra", "Kout", "23");
-        BankAccount OriginalBankAccount = this.accountFacade.createBankAccount(100, owner1, true);
-        BankAccount StudentBankAccount = this.bankFactory.createStudentBankacount(200.0, owner1);
-        BankAccount SavingBankAccount = this.bankFactory.createSavingBankacount(200.0, owner1);
+        BankAccount originalBankAccount = this.accountFacade.createBankAccount(100, owner1, true);
+        BankAccount studentBankAccount = this.bankAccountFactory.createStudentBankacount(200.0, owner1);
+        BankAccount savingBankAccount = this.bankAccountFactory.createSavingBankacount(200.0, owner1);
         BankCard bankCard = null;
-        for (Map.Entry<String, BankCard> entrySet : OriginalBankAccount.GetCards().entrySet()) {
+        for (Map.Entry<String, BankCard> entrySet : originalBankAccount.GetCards().entrySet()) {
             bankCard = entrySet.getValue();
         }
         System.out.println(personSerialiazationService.serializeOwner(owner1));
 
-        if (StudentBankAccount instanceof StudentBankAccount)
+        if (studentBankAccount instanceof StudentBankAccount)
         {
-            String expire = ((StudentBankAccount) StudentBankAccount).getStudies();
+            String expire = ((StudentBankAccount) studentBankAccount).getStudies();
             System.out.println(expire);
         }
 
-        if (SavingBankAccount instanceof Interesting)
+        if (savingBankAccount instanceof Interesting)
         {
-            double interest = ((Interesting) SavingBankAccount).getInterest();
+            double interest = ((Interesting) savingBankAccount).getInterest();
             System.out.println(interest);
         }
-        atmService.depositMoney(globalBankCardStorage.getBankCard(bankCard.getNumber()), 100);
-        atmService.withdrawMoney(globalBankCardStorage.getBankCard(bankCard.getNumber()), 100);
+
+        atmService.depositMoney(bankCard.getNumber(), 100);
+        atmService.withdrawMoney(bankCard.getNumber(), 100);
+
     }
 }

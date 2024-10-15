@@ -13,10 +13,10 @@ public class AccountFacade {
     @Inject
     BankCardFactory bankCardFactory;
     @Inject
-    BankFactory bankFactory;
+    BankAccountFactory bankAccountFactory;
 
     public BankAccount createBankAccount(double balance, Owner owner1, boolean addcard) {
-        BankAccount bankAccount1 = bankFactory.createBankacount(100, owner1);
+        BankAccount bankAccount1 = bankAccountFactory.createBankacount(100, owner1);
         if (addcard == true) {
             BankCard bankCard1 = bankCardFactory.createBankCard(bankAccount1);
             bankAccount1.AddCard(bankCard1);
