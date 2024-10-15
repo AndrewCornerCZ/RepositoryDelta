@@ -6,15 +6,12 @@ import com.google.inject.Singleton;
 @Singleton
 public class BankCardFactory {
     @Inject
-    public CardNumberGenerator cardNumberGenerator;
-
+    CardNumberGenerator bankCardNumberGenerator;
     @Inject
-    public  CardPinGenerator cardPinGenerator;
+    CardPinGenerator bankCardPINGenerator;
 
-    public BankCard BankCardFactory() {
-        return new BankCard(
-                this.cardNumberGenerator.generateCardNumber(),
-                this.cardPinGenerator.generateCardPinNumber()
-        );
+    public BankCard createBankCard(){
+        return new BankCard(bankCardNumberGenerator.generateCardNumber(), bankCardPINGenerator.generateCardPinNumber());
     }
+}
 }

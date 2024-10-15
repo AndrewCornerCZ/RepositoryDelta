@@ -51,7 +51,7 @@ public class App {
     BankCardFactory bankCardFactory;
     public void runbank()
     {
-        BankCard card = this.bankCardFactory.();
+        BankCard card = this.bankCardFactory.c;
         Owner owner1 = this.ownerFactory.createOwner("Ondra", "Kout", "23");
         BankAccount OriginalBankaccount = this.bankFactory.createBankacount(200.0, owner1);
         BankAccount StudentBankaccount = this.bankFactory.createStudentBankacount(200.0, owner1);
