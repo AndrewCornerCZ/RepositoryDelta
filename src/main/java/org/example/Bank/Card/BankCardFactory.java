@@ -14,4 +14,4 @@ public class BankCardFactory {
         return new BankCard(bankCardNumberGenerator.generateCardNumber(), bankCardPINGenerator.generateCardPinNumber());
     }
 }
-}
+
