@@ -20,10 +20,9 @@ public class InterestingSevice {
         {
             if (bankAccount instanceof Interesting)
             {
-                System.out.println("Old balance=" + bankAccount.getBalance());
-                bankAccount.setBalance(interestingCounting.counting(bankAccount.getBalance(), interestingCounting.percentCounting(bankAccount)));
-                System.out.println("New balance=" + bankAccount.getBalance());
+                continue;
             }
+            moneyTransfer.interestingAddMoney(bankAccount, interestingCounting.counting(bankAccount.getBalance()));
         }
     }
 }

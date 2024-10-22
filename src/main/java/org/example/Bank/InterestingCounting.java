@@ -5,17 +5,17 @@ import com.google.inject.Singleton;
 @Singleton
 public class InterestingCounting {
 
-    public double percentCounting(BankAccount account)
+    public double percentCounting(double balance)
     {
-        if (account.getBalance() < 500000)
+        if (balance < 500000)
         {
             return 0.04;
         }
         return 0.01;
     }
 
-    public double counting(double balance, double interest) {
-        balance = balance + balance * interest;
+    public double counting(double balance) {
+        balance = balance + balance * this.percentCounting(balance);
         return balance;
     }
 }

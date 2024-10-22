@@ -16,7 +16,6 @@ public class MoneyTransfer {
     @Inject
     private SavingAccount.TransferFee transferFee;
 
-
     public void withdrawMoney(BankAccount bankAccount, double amount) throws NoMoneyOnAccountException
     {
         if(bankAccount.getBalance() < amount) {
@@ -51,5 +50,12 @@ public class MoneyTransfer {
             return false;
         }
         return true;
+    }
+
+    public void interestingAddMoney(BankAccount bankAccount, double amount)
+    {
+        System.out.println("Old balance=" + bankAccount.getBalance());
+        bankAccount.setBalance(amount);
+        System.out.println("New balance=" + bankAccount.getBalance());
     }
 }
