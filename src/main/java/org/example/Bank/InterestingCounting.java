@@ -15,7 +15,7 @@ public class InterestingCounting {
     }
 
     public double counting(double balance) {
-        balance = balance + balance * this.percentCounting(balance);
+        balance = balance * this.percentCounting(balance);
         return balance;
     }
 }

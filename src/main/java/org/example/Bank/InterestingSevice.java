@@ -18,7 +18,7 @@ public class InterestingSevice {
 
         for(BankAccount bankAccount: globalBankStorage.getStorage())
         {
-            if (bankAccount instanceof Interesting)
+            if (!(bankAccount instanceof Interesting))
             {
                 continue;
             }

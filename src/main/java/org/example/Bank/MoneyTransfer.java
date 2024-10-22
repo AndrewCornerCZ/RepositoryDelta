@@ -52,10 +52,15 @@ public class MoneyTransfer {
         return true;
     }
 
+    public void addMoney(BankAccount bankAccount, double amount)
+    {
+        bankAccount.setBalance(bankAccount.getBalance() + amount);
+    }
+
     public void interestingAddMoney(BankAccount bankAccount, double amount)
     {
         System.out.println("Old balance=" + bankAccount.getBalance());
-        bankAccount.setBalance(amount);
+        this.addMoney(bankAccount, amount);
         System.out.println("New balance=" + bankAccount.getBalance());
     }
 }
