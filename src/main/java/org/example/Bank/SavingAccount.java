@@ -14,7 +14,7 @@ public class SavingAccount extends BankAccount implements Interesting{
     @Override
     public double getInterest() {
         InterestingCounting count = new InterestingCounting();
-        return count.Counting(this);
+        return count.percentCounting(this);
     }
 
     public static class TransferFee {

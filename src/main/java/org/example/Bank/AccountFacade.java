@@ -14,6 +14,8 @@ public class AccountFacade {
     BankCardFactory bankCardFactory;
     @Inject
     BankAccountFactory bankAccountFactory;
+    @Inject
+    GlobalBankStorage globalBankStorage;
 
     public BankAccount createBankAccount(double balance, Owner owner1, boolean addcard) {
         BankAccount bankAccount1 = bankAccountFactory.createBankacount(balance, owner1);
@@ -22,6 +24,7 @@ public class AccountFacade {
             bankAccount1.AddCard(bankCard1);
             globalBankCardStorage.addBankCard(bankCard1.getNumber(), bankAccount1);
         }
+        globalBankStorage.addBankAccount(bankAccount1);
         return bankAccount1;
     }
     public StudentBankAccount createStudentBankAccount(double balance, Owner owner1, boolean addcard) {
@@ -31,6 +34,7 @@ public class AccountFacade {
             studentBankAccount1.AddCard(bankCard1);
             globalBankCardStorage.addBankCard(bankCard1.getNumber(), studentBankAccount1);
         }
+        globalBankStorage.addBankAccount(studentBankAccount1);
         return studentBankAccount1;
     }
     public BankAccount createSavingBankAccount(double balance, Owner owner1, boolean addcard) {
@@ -40,6 +44,7 @@ public class AccountFacade {
             savingAccount1.AddCard(bankCard1);
             globalBankCardStorage.addBankCard(bankCard1.getNumber(), savingAccount1);
         }
+        globalBankStorage.addBankAccount(savingAccount1);
         return savingAccount1;
     }
 
