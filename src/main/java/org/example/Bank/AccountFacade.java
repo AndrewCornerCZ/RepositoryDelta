@@ -14,10 +14,6 @@ public class AccountFacade {
     BankCardFactory bankCardFactory;
     @Inject
     BankAccountFactory bankAccountFactory;
-    @Inject
-    StudentBankAccount studentBankAccountBankAccount;
-    @Inject
-    SavingAccount savingAccount;
 
     public BankAccount createBankAccount(double balance, Owner owner1, boolean addcard) {
         BankAccount bankAccount1 = bankAccountFactory.createBankacount(balance, owner1);
@@ -37,7 +33,7 @@ public class AccountFacade {
         }
         return studentBankAccount1;
     }
-    public BankAccount createBankAccount1(double balance, Owner owner1, boolean addcard) {
+    public BankAccount createSavingBankAccount(double balance, Owner owner1, boolean addcard) {
         SavingAccount savingAccount1 = bankAccountFactory.createSavingBankacount(100, owner1);
         if (addcard == true) {
             BankCard bankCard1 = bankCardFactory.createBankCard(savingAccount1);

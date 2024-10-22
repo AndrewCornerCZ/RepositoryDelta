@@ -11,10 +11,14 @@ public class BankCard {
     public BankCard(String number, String pin, BankAccount bankAccount) {
         this.number = number;
         this.pin = pin;
-        bankAccount = bankAccount;
+        this.bankAccount = bankAccount;
     }
 
     public String getNumber() {
         return number;
+    }
+
+    public String getPin() {
+        return pin;
     }
 }

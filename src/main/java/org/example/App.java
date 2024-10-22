@@ -5,6 +5,7 @@ import org.example.Bank.*;
 import org.example.Bank.Card.BankCard;
 import org.example.Bank.Card.BankCardFactory;
 import org.example.Bank.exception.NoMoneyOnAccountException;
+import org.example.Bank.exception.WrongPinException;
 import org.example.person.Owner;
 import org.example.person.OwnerFactory;
 import org.example.person.PersonSerialiazationService;
@@ -56,11 +57,11 @@ public class App {
     AccountFacade accountFacade;
     @Inject
     GlobalBankCardStorage globalBankCardStorage;
-    public void runbank() throws NoMoneyOnAccountException {
+    public void runbank() throws NoMoneyOnAccountException, WrongPinException {
         Owner owner1 = this.ownerFactory.createOwner("Ondra", "Kout", "23");
         BankAccount originalBankAccount = this.accountFacade.createBankAccount(100, owner1, true);
-        BankAccount studentBankAccount = this.bankAccountFactory.createStudentBankacount(200.0, owner1);
-        BankAccount savingBankAccount = this.bankAccountFactory.createSavingBankacount(200.0, owner1);
+        BankAccount studentBankAccount = this.accountFacade.createStudentBankAccount(100, owner1, true);
+        BankAccount savingBankAccount = this.accountFacade.createSavingBankAccount(100, owner1, true);
         BankCard bankCard = null;
         for (Map.Entry<String, BankCard> entrySet : originalBankAccount.GetCards().entrySet()) {
             bankCard = entrySet.getValue();
@@ -79,8 +80,8 @@ public class App {
             System.out.println(interest);
         }
 
-        atmService.depositMoney(bankCard.getNumber(), 100);
-        atmService.withdrawMoney(bankCard.getNumber(), 100);
+        atmService.depositMoney(bankCard.getNumber(), bankCard.getPin(), 100);
+        atmService.withdrawMoney(bankCard.getNumber(), bankCard.getPin(), 100);
 
     }
 }

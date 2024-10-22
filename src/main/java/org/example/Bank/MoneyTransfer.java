@@ -2,6 +2,11 @@ package org.example.Bank;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import org.example.Bank.Card.BankCard;
+import org.example.Bank.exception.NoMoneyOnAccountException;
+import org.example.Bank.exception.WrongPinException;
+
+import java.util.Map;
 
 @Singleton
 public class MoneyTransfer {
@@ -12,14 +17,14 @@ public class MoneyTransfer {
     private SavingAccount.TransferFee transferFee;
 
 
-    public void Add (BankAccount bankacount, double add)
+    public void withdrawMoney(BankAccount bankAccount, double amount) throws NoMoneyOnAccountException
     {
-        double balance = bankacount.getBalance();
-        double fee = this.transferFee.FeeCalcul(add);
-        double NewBalance = balance + add - fee;
-
-        bankacount.setBalance(NewBalance);
-        this.printDetail(bankacount);
+        if(bankAccount.getBalance() < amount) {
+            throw new NoMoneyOnAccountException("No money");
+        }
+        System.out.println("Balance before: " + bankAccount.getBalance());
+        bankAccount.setBalance(bankAccount.getBalance()-amount);
+        System.out.println("Balance after: " + bankAccount.getBalance());
     }
 
     public void printDetail(BankAccount bankacount)
@@ -38,5 +43,13 @@ public class MoneyTransfer {
         System.out.println("Balance: " + sender.getBalance());
         receiver.setBalance(receiver.getBalance() + amount);
         System.out.println("Balance: " + receiver.getBalance());
+    }
+    public boolean PinConfirmation(String pin, String number, BankCard bankCard) throws WrongPinException
+    {
+        if(pin != bankCard.getPin())
+        {
+            return false;
+        }
+        return true;
     }
 }

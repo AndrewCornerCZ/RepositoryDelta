@@ -40,4 +40,8 @@ public class BankAccount {
     public Map<String, BankCard> GetCards() {
         return cards;
     }
+    public BankCard GetCard(String name) {
+        BankCard bankCard = null;
+        return cards.get(name);
+    }
 }
