@@ -1,8 +1,12 @@
 package org.example.Bank;
 
+import org.example.Bank.Investments.InvestmentAccount;
+import org.example.Bank.Investments.Stock;
 import org.example.person.Owner;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+
+import java.util.Map;
 
 @Singleton
 public class BankAccountFactory {
@@ -28,5 +32,8 @@ public class BankAccountFactory {
     public SavingAccount createSavingBankacount(double balance, Owner owner, String number) {
         return new SavingAccount(balance, owner, number);
     }
-
+    public InvestmentAccount createInvestmentAccount(double balance, Owner owner, Map<String, Stock> stocks) {
+        String bankAccountNumber = this.bankacountNumberGenerator.generateBankAccountNumber();
+        return new InvestmentAccount(balance, owner, bankAccountNumber, stocks);
+    }
 }

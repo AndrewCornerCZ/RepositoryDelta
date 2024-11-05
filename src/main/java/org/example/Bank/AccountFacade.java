@@ -4,7 +4,11 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.example.Bank.Card.BankCard;
 import org.example.Bank.Card.BankCardFactory;
+import org.example.Bank.Investments.InvestmentAccount;
+import org.example.Bank.Investments.Stock;
 import org.example.person.Owner;
+
+import java.util.Map;
 
 @Singleton
 public class AccountFacade {
@@ -47,6 +51,18 @@ public class AccountFacade {
         globalBankStorage.addBankAccount(savingAccount1);
         return savingAccount1;
     }
+    public InvestmentAccount createInvestmentAccount(double balance, Owner owner1, boolean addcard, Map<String, Stock> stocksMap) {
+        InvestmentAccount investmentAccount1 = bankAccountFactory.createInvestmentAccount(0, owner1, stocksMap);
+        if (addcard == true) {
+            BankCard bankCard1 = bankCardFactory.createBankCard(investmentAccount1);
+            investmentAccount1.AddCard(bankCard1);
+            globalBankCardStorage.addBankCard(bankCard1.getNumber(), investmentAccount1);
+        }
+        globalBankStorage.addBankAccount(investmentAccount1);
+        return investmentAccount1;
+    }
+
+
 
 
 }

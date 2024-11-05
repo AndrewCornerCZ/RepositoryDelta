@@ -3,6 +3,8 @@ package org.example.Bank;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.example.Bank.Card.BankCard;
+import org.example.Bank.Investments.InvestmentAccount;
+import org.example.Bank.Investments.Stock;
 import org.example.Bank.exception.NoMoneyOnAccountException;
 import org.example.Bank.exception.WrongPinException;
 
@@ -62,5 +64,15 @@ public class MoneyTransfer {
         System.out.println("Old balance=" + bankAccount.getBalance());
         this.addMoney(bankAccount, amount);
         System.out.println("New balance=" + bankAccount.getBalance());
+    }
+
+    public void investmentAddMoney(InvestmentAccount investmentAccount, double amount)
+    {
+        for (Map.Entry<String, Stock> entrySet : investmentAccount.getMap().entrySet()) {
+             Stock stock = entrySet.getValue();
+             stock.setBalance(amount* stock.getPercentage());
+             investmentAccount.getMap().put(entrySet.getKey(), stock);
+             System.out.println(stock.getId() + ": " + stock.getBalance());
+        }
     }
 }
