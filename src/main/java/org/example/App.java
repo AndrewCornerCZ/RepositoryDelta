@@ -3,7 +3,6 @@ package org.example;
 import com.google.inject.Inject;
 import org.example.Bank.*;
 import org.example.Bank.Card.BankCard;
-import org.example.Bank.Card.BankCardFactory;
 import org.example.Bank.Investments.InvestmentAccount;
 import org.example.Bank.Investments.InvestmentService;
 import org.example.Bank.Investments.Stock;
@@ -14,7 +13,7 @@ import org.example.person.Owner;
 import org.example.person.OwnerFactory;
 import org.example.person.PersonSerialiazationService;
 import org.example.print.Calc;
-import org.example.print.Calcul;
+import org.example.print.Calculator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -89,7 +88,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
         double a = sc.nextDouble();
         double b = sc.nextDouble();
-        Calc kalk = new Calcul();
+        Calc kalk = new Calculator();
         System.out.println(kalk.add(a, b));
         System.out.println(kalk.div(a, b));
         System.out.println(kalk.sub(a, b));
