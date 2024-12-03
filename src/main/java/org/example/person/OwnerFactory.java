@@ -2,6 +2,8 @@ package org.example.person;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.example.Bank.AccountNumberGenerator;
+import org.example.Bank.GlobalOwnerStorage;
+
 @Singleton
 public class OwnerFactory {
 
@@ -9,7 +11,8 @@ public class OwnerFactory {
     private PersonalIdValidator personIdValidator;
     @Inject
     private AccountNumberGenerator bankacountNumberGenerator;
-
+    @Inject
+    private GlobalOwnerStorage globalOwnerStorage;
 
     public Owner createOwner(String name, String lastName, String personalId) {
 
@@ -17,7 +20,8 @@ public class OwnerFactory {
             System.out.println("Invalid personal ID");
         }
         System.out.println("Number:" + bankacountNumberGenerator.generateBankAccountNumber());
-
-        return new Owner(name, lastName, personalId);
+        Owner owner = new Owner(name, lastName, personalId);
+        globalOwnerStorage.addOwner(owner);
+        return owner;
     }
 }
