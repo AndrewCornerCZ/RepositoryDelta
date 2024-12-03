@@ -14,13 +14,15 @@ import org.example.person.OwnerFactory;
 import org.example.person.PersonSerialiazationService;
 import org.example.print.Calc;
 import org.example.print.Calculator;
+import serialization.BankSerializationService;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class App {
-
+@Inject
+    BankSerializationService bankSerializationService;
     @Inject
     PersonSerialiazationService personSerialiazationService;
     @Inject
@@ -64,6 +66,7 @@ public class App {
         moneyTransfer.investmentAddMoney(investmentAccount,720);
         moneyTransfer.investmentAddMoney(investmentAccount,914);
         investmentService.run(investmentAccount);
+        bankSerializationService.saveBank();
     }
 
 

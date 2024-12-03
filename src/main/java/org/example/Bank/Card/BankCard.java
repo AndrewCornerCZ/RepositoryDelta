@@ -6,7 +6,7 @@ import org.example.Bank.BankAccount;
 public class BankCard {
     private String number;
     private String pin;
-    private BankAccount bankAccount;
+    private transient BankAccount bankAccount;
 
     public BankCard(String number, String pin, BankAccount bankAccount) {
         this.number = number;
