@@ -39,6 +39,8 @@ public class App {
     MoneyTransfer moneyTransfer;
     @Inject
     InvestmentService investmentService;
+    @Inject
+    GlobalBankStorage globalBankStorage;
 
     public void runbank() throws NoMoneyOnAccountException, WrongPinException {
         Owner owner1 = this.ownerFactory.createOwner("Ondra", "Kout", "23");
@@ -66,7 +68,12 @@ public class App {
         moneyTransfer.investmentAddMoney(investmentAccount,720);
         moneyTransfer.investmentAddMoney(investmentAccount,914);
         investmentService.run(investmentAccount);
-        bankSerializationService.saveBank();
+        if (globalBankStorage == null) {
+            bankSerializationService.saveBank();
+        }
+        else {
+            bankSerializationService.loadBank();
+        }
     }
 
 
